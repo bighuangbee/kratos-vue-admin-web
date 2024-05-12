@@ -101,13 +101,13 @@
         <el-form-item label="角色顺序" prop="roleSort">
           <el-input-number v-model="state.roleForm.roleSort" controls-position="right" :min="0" />
         </el-form-item>
-        <el-form-item label="状态">
-          <el-radio-group v-model="state.roleForm.status">
-            <el-radio v-for="dict in state.statusOptions" :key="dict.dictValue" :label="dict.dictValue">{{ dict.dictLabel
-            }}
-            </el-radio>
-          </el-radio-group>
-        </el-form-item>
+<!--        <el-form-item label="状态">-->
+<!--          <el-radio-group v-model="state.roleForm.status">-->
+<!--            <el-radio v-for="dict in state.statusOptions" :key="dict.dictValue" :label="dict.dictValue">{{ dict.dictLabel-->
+<!--            }}-->
+<!--            </el-radio>-->
+<!--          </el-radio-group>-->
+<!--        </el-form-item>-->
 
         <el-form-item label="权限设置">
           <el-tabs v-model="state.activeName">
@@ -297,7 +297,9 @@ const state: any = reactive({
     },
   ],
   // 表单参数
-  roleForm: {},
+  roleForm: {
+    roleSort: 0,
+  },
   // 表单校验
   rules: {
     roleName: [
@@ -332,7 +334,6 @@ const reset = () => {
       deptCheckStrictly: true,
       remark: undefined,
     });
-  state.roleForm = {};
 };
 /** 重置按钮操作 */
 const resetQuery = () => {
@@ -582,6 +583,18 @@ const submitForm = () => {
       } else {
         state.roleForm.menuIds = getMenuAllCheckedKeys();
         state.roleForm.apiIds = getApiAllCheckedKeys();
+
+        if (state.roleForm.menuIds.length === 0){
+          ElMessage.error("菜单权限不能为空");
+          state.bunLoading = false;
+          return
+        }
+        if (state.roleForm.apiIds.length === 0){
+          ElMessage.error("API权限不能为空");
+          state.bunLoading = false;
+          return
+        }
+
         addRole(state.roleForm).then(() => {
           ElMessage.success("新增成功");
           state.bunLoading = true;

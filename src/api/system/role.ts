@@ -1,5 +1,12 @@
 import request from '@/utils/request';
 
+// 角色选项
+export function roleOptions() {
+	return request({
+		url: '/system/role/roles',
+		method: 'get',
+	})
+}
 
 // 查询角色列表
 export function listRole(query: Array<object>) {

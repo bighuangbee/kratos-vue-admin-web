@@ -94,14 +94,16 @@
               </template>
             </el-table-column>
             <el-table-column prop="path" align="center" label="操作" width="200">
-              <el-button text type="primary" v-auth="'system:user:edit'" @click="handleUpdate(scope.row)">
-                <SvgIcon name="elementEdit" />
-                修改
-              </el-button>
-              <el-button text type="primary" v-auth="'system:user:delete'" @click="handleDelete(scope.row)">
-                <SvgIcon name="elementDelete" />
-                删除
-              </el-button>
+              <template #default="scope">
+                <el-button text type="primary" v-auth="'system:user:edit'" @click="handleUpdate(scope.row)">
+                  <SvgIcon name="elementEdit" />
+                  修改
+                </el-button>
+                <el-button text type="primary" v-auth="'system:user:delete'" @click="handleDelete(scope.row)">
+                  <SvgIcon name="elementDelete" />
+                  删除
+                </el-button>
+              </template>
             </el-table-column>
           </el-table>
           <div v-show="state.tableData.total > 0">

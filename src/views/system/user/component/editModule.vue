@@ -18,7 +18,7 @@
             </el-form-item>
           </el-col>
           <el-col v-if="state.ruleForm.userId == undefined" :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-            <el-form-item label="用户密码" prop="password">
+            <el-form-item label="密码" prop="password">
               <el-input v-model="state.ruleForm.password" placeholder="请输入用户密码" type="password" />
             </el-form-item>
           </el-col>
@@ -115,6 +115,7 @@ import twoDimensionalCode from "@/components/twoDimensionalCode/index.vue"
 import { treeselect } from "@/api/system/dept";
 import { updateUser, addUser, getUser, getUserInit, userSecret } from "@/api/system/user";
 import { ElMessage } from "element-plus";
+import {listRole, roleOptions} from "@/api/system/role";
 
 const props = defineProps({
   title: {
@@ -209,7 +210,7 @@ const openDialog = (row: any) => {
       state.ruleForm = response.data?.user;
       state.ruleForm.deptId = state.ruleForm.deptId + '';
       state.postOptions = response.data?.posts;
-      state.roleOptions = response.data?.roles;
+      // state.roleOptions = response.data?.roles;
       state.deptOptions = response.data.depts;
       state.postIds = response.data.postIds.split(",").map((item: string) => {
         return Number(item)
@@ -219,10 +220,14 @@ const openDialog = (row: any) => {
       });
       state.ruleForm.password = ""
     });
+
+    roleOptions().then((response: any) => {
+      state.roleOptions = response.data?.data
+    });
   } else {
     getUserInit().then(response => {
       state.postOptions = response.data.posts
-      state.roleOptions = response.data.roles
+      state.roleOptions = response.data?.roles
     })
     state.ruleForm = JSON.parse(JSON.stringify(row));
     getUserSecret()
