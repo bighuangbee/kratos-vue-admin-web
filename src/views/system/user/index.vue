@@ -2,20 +2,20 @@
   <div class="system-user-container app-container">
     <el-row :gutter="20">
       <!--部门数据-->
-      <el-col :span="4" :xs="24">
-        <el-card shadow="always">
-          <div class="head-container">
-            <el-input v-model="state.deptName" placeholder="请输入部门名称" clearable prefix-icon="el-icon-search"
-              style="margin-bottom: 20px" />
-          </div>
-          <div class="head-container">
-            <el-tree :data="state.deptOptions" :props="state.defaultProps" node-key="deptId" :expand-on-click-node="false"
-              :filter-node-method="filterNode" ref="tree" default-expand-all @node-click="handleNodeClick" />
-          </div>
-        </el-card>
-      </el-col>
+<!--      <el-col :span="4" :xs="24">-->
+<!--        <el-card shadow="always">-->
+<!--          <div class="head-container">-->
+<!--            <el-input v-model="state.deptName" placeholder="请输入部门名称" clearable prefix-icon="el-icon-search"-->
+<!--              style="margin-bottom: 20px" />-->
+<!--          </div>-->
+<!--          <div class="head-container">-->
+<!--            <el-tree :data="state.deptOptions" :props="state.defaultProps" node-key="deptId" :expand-on-click-node="false"-->
+<!--              :filter-node-method="filterNode" ref="tree" default-expand-all @node-click="handleNodeClick" />-->
+<!--          </div>-->
+<!--        </el-card>-->
+<!--      </el-col>-->
 
-      <el-col :span="20" :xs="24">
+      <el-col :span="24" :xs="24">
         <el-card shadow="always">
           <!-- 查询-->
           <el-form :model="state.queryParams" ref="queryForm" :inline="true" label-width="78px">
@@ -93,28 +93,15 @@
                 {{ dateStrFormat(scope.row?.createTime) }}
               </template>
             </el-table-column>
-            <el-table-column prop="path" align="center" label="操作">
-              <template #default="scope">
-                <el-popover placement="left">
-                  <template #reference>
-                    <el-button type="primary" circle>
-                      <SvgIcon name="elementStar" />
-                    </el-button>
-                  </template>
-                  <div>
-                    <el-button text type="primary" v-auth="'system:user:edit'" @click="handleUpdate(scope.row)">
-                      <SvgIcon name="elementEdit" />
-                      修改
-                    </el-button>
-                  </div>
-                  <div>
-                    <el-button text type="primary" v-auth="'system:user:delete'" @click="handleDelete(scope.row)">
-                      <SvgIcon name="elementDelete" />
-                      删除
-                    </el-button>
-                  </div>
-                </el-popover>
-              </template>
+            <el-table-column prop="path" align="center" label="操作" width="200">
+              <el-button text type="primary" v-auth="'system:user:edit'" @click="handleUpdate(scope.row)">
+                <SvgIcon name="elementEdit" />
+                修改
+              </el-button>
+              <el-button text type="primary" v-auth="'system:user:delete'" @click="handleDelete(scope.row)">
+                <SvgIcon name="elementDelete" />
+                删除
+              </el-button>
             </el-table-column>
           </el-table>
           <div v-show="state.tableData.total > 0">

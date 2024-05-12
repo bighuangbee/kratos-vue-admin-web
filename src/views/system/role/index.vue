@@ -63,33 +63,20 @@
             <span>{{ dateStrFormat(scope.row?.createTime) }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center">
+        <el-table-column label="操作" align="center" width="350">
           <template #default="scope">
-            <el-popover placement="left">
-              <template #reference>
-                <el-button type="primary" circle>
-                  <SvgIcon name="elementStar" />
-                </el-button>
-              </template>
-              <div>
-                <el-button text type="primary" v-auth="'system:role:edit'" @click="handleUpdate(scope.row)">
-                  <SvgIcon name="elementEdit" />
-                  修改
-                </el-button>
-              </div>
-              <div>
-                <el-button text type="primary" @click="handleDataScope(scope.row)">
-                  <SvgIcon name="elementCircleCheck" />
-                  数据权限
-                </el-button>
-              </div>
-              <div>
-                <el-button text type="primary" v-auth="'system:role:delete'" @click="handleDelete(scope.row)">
-                  <SvgIcon name="elementDelete" />
-                  删除
-                </el-button>
-              </div>
-            </el-popover>
+            <el-button text type="primary" v-auth="'system:role:edit'" @click="handleUpdate(scope.row)">
+              <SvgIcon name="elementEdit" />
+              修改
+            </el-button>
+            <el-button text type="primary" @click="handleDataScope(scope.row)">
+              <SvgIcon name="elementCircleCheck" />
+              数据权限
+            </el-button>
+            <el-button text type="primary" v-auth="'system:role:delete'" @click="handleDelete(scope.row)">
+              <SvgIcon name="elementDelete" />
+              删除
+            </el-button>
           </template>
         </el-table-column>
       </el-table>

@@ -72,33 +72,20 @@
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center">
+        <el-table-column label="操作" align="center" width="300">
           <template #default="scope">
-            <el-popover placement="left">
-              <template #reference>
-                <el-button type="primary" circle>
-                  <SvgIcon name="elementStar" />
-                </el-button>
-              </template>
-              <div>
-                <el-button text type="primary" v-auth="'system:menu:edit'" @click="onOpenEditMenu(scope.row)">
-                  <SvgIcon name="elementEdit" />
-                  修改
-                </el-button>
-              </div>
-              <div>
-                <el-button text type="primary" v-auth="'system:menu:add'" @click="onOpenAddMenu(scope.row)">
-                  <SvgIcon name="elementPlus" />
-                  新增
-                </el-button>
-              </div>
-              <div>
-                <el-button text type="primary" v-auth="'system:menu:delete'" @click="handleDelete(scope.row)">
-                  <SvgIcon name="elementDelete" />
-                  删除
-                </el-button>
-              </div>
-            </el-popover>
+            <el-button text type="primary" v-auth="'system:menu:edit'" @click="onOpenEditMenu(scope.row)">
+              <SvgIcon name="elementEdit" />
+              修改
+            </el-button>
+            <el-button text type="primary" v-auth="'system:menu:add'" @click="onOpenAddMenu(scope.row)">
+              <SvgIcon name="elementPlus" />
+              新增
+            </el-button>
+            <el-button text type="primary" v-auth="'system:menu:delete'" @click="handleDelete(scope.row)">
+              <SvgIcon name="elementDelete" />
+              删除
+            </el-button>
           </template>
         </el-table-column>
       </el-table>

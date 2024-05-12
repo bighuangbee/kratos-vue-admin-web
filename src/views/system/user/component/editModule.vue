@@ -12,9 +12,9 @@
               <el-input v-model="state.ruleForm.nickName" placeholder="请输入用户昵称" />
             </el-form-item>
           </el-col>
-          <el-col v-if="state.ruleForm.userId == undefined" :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
+          <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
             <el-form-item label="用户名称" prop="username">
-              <el-input v-model="state.ruleForm.username" placeholder="请输入用户名称" />
+              <el-input :disabled="state.ruleForm.userId != undefined" v-model="state.ruleForm.username" placeholder="请输入用户名称" />
             </el-form-item>
           </el-col>
           <el-col v-if="state.ruleForm.userId == undefined" :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
@@ -81,20 +81,20 @@
               <el-input v-model="state.ruleForm.remark" type="textarea" placeholder="请输入内容"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-            <el-form-item label="谷歌秘钥" prop="secret">
-              <div class="system-secret">
-                <el-input v-model="state.ruleForm.secret" disabled />
-                <el-button type="primary" @click="getUserSecret">刷新</el-button>
-              </div>
-            </el-form-item>
-          </el-col>
+<!--          <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">-->
+<!--            <el-form-item label="谷歌秘钥" prop="secret">-->
+<!--              <div class="system-secret">-->
+<!--                <el-input v-model="state.ruleForm.secret" disabled />-->
+<!--                <el-button type="primary" @click="getUserSecret">刷新</el-button>-->
+<!--              </div>-->
+<!--            </el-form-item>-->
+<!--          </el-col>-->
 
-          <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-            <el-form-item label="谷歌秘钥二维码">
-              <twoDimensionalCode :ruleForm="state.ruleForm" />
-            </el-form-item>
-          </el-col>
+<!--          <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">-->
+<!--            <el-form-item label="谷歌秘钥二维码">-->
+<!--              <twoDimensionalCode :ruleForm="state.ruleForm" />-->
+<!--            </el-form-item>-->
+<!--          </el-col>-->
         </el-row>
       </el-form>
 
@@ -180,12 +180,12 @@ const state = reactive({
     password: [
       { required: true, message: "用户密码不能为空", trigger: "blur" },
     ],
-    secret: [
-      { required: true, message: "谷歌密钥不能为空", trigger: "blur" },
-    ],
-    qrcode: [
-      { required: true, message: "谷歌二维码不能为空", trigger: "blur" },
-    ],
+    // secret: [
+    //   { required: true, message: "谷歌密钥不能为空", trigger: "blur" },
+    // ],
+    // qrcode: [
+    //   { required: true, message: "谷歌二维码不能为空", trigger: "blur" },
+    // ],
     email: [
       {
         type: "email",
@@ -277,6 +277,8 @@ const onSubmit = () => {
       state.ruleForm.postIds = state.postIds.join(',')
       state.ruleForm.roleIds = state.roleIds.join(',')
       state.loading = true;
+
+      console.log("state.ruleForm:", state.ruleForm)
       if (state.ruleForm.userId != undefined) {
         updateUser(state.ruleForm).then((response) => {
           ElMessage.success("修改成功");

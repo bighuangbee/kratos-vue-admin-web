@@ -107,27 +107,15 @@
         <el-table-column
             label="操作"
             align="center"
-            class-name="small-padding fixed-width"
-        >
-          <template #default="scope">
-            <el-popover  placement="left">
-              <template #reference>
-                <el-button type="primary" circle ><SvgIcon name="elementStar"/></el-button>
-              </template>
-              <div>
-                <el-button text type="primary" v-auth="'system:post:edit'" @click="onOpenEditModule(scope.row)">
-                  <SvgIcon name="elementEdit"/>
-                  修改
-                </el-button>
-              </div>
-              <div>
-                <el-button text type="primary" v-auth="'system:post:delete'" @click="onTabelRowDel(scope.row)">
-                  <SvgIcon name="elementDelete"/>
-                  删除
-                </el-button>
-              </div>
-            </el-popover>
-          </template>
+            class-name="small-padding fixed-width">
+          <el-button text type="primary" v-auth="'system:post:edit'" @click="onOpenEditModule(scope.row)">
+            <SvgIcon name="elementEdit"/>
+            修改
+          </el-button>
+          <el-button text type="primary" v-auth="'system:post:delete'" @click="onTabelRowDel(scope.row)">
+            <SvgIcon name="elementDelete"/>
+            删除
+          </el-button>
         </el-table-column>
       </el-table>
       <!-- 分页设置-->
